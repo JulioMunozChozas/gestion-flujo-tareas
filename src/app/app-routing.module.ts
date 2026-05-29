@@ -4,7 +4,23 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
+    loadChildren: () => import('./workflow/workflow.module').then(m => m.WorkflowPageModule)
+  },
+  {
+    path: 'todo',
+    loadChildren: () => import('./todo/todo.module').then( m => m.TodoPageModule)
+  },
+  {
+    path: 'doing',
+    loadChildren: () => import('./doing/doing.module').then( m => m.DoingPageModule)
+  },
+  {
+    path: 'done',
+    loadChildren: () => import('./done/done.module').then( m => m.DonePageModule)
+  },
+  {
+    path: 'workflow',
+    loadChildren: () => import('./workflow/workflow.module').then( m => m.WorkflowPageModule)
   }
 ];
 @NgModule({
