@@ -4,7 +4,8 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./workflow/workflow.module').then(m => m.WorkflowPageModule)
+    redirectTo: 'workflow',
+    pathMatch: 'full',
   },
   {
     path: 'todo',

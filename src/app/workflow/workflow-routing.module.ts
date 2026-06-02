@@ -5,7 +5,7 @@ import { WorkflowPage } from './workflow.page';
 
 const routes: Routes = [
   {
-    path: 'workflow',
+    path: '',
     component: WorkflowPage,
     children: [
       {
@@ -22,7 +22,7 @@ const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: '/worflow/todo',
+        redirectTo: 'todo',
         pathMatch: 'full'
       }
     ]

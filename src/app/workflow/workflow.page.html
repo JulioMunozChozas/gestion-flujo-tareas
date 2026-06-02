@@ -1,23 +1,19 @@
 <ion-tabs>
-
     <ion-tab-bar slot="bottom">
-        <ion-tab-button tab="todo" href="">
-            <ion-icon aria-hidden="true" name="list-circle-outline"></ion-icon>
-            <!--<ion-icon aria-hidden="true" name="triangle"></ion-icon>-->
+        <ion-tab-button tab="todo" href="/workflow/todo">
+            <ion-icon name="list-circle-outline"></ion-icon>
             <ion-label>Lista de tareas</ion-label>
         </ion-tab-button>
 
-        <ion-tab-button tab="doing" href="">
-            <ion-icon aria-hidden="true" name="settings-outline"></ion-icon>
-            <!--<ion-icon aria-hidden="true" name="square"></ion-icon>-->
+        <ion-tab-button tab="doing" href="/workflow/doing">
+            <ion-icon name="settings-outline"></ion-icon>
             <ion-label>Ajustes (vacío al inicio)</ion-label>
         </ion-tab-button>
+
+        <ion-tab-button tab="done" href="/worflow/done">
+            <ion-icon name="checkmark-circle-outline"></ion-icon>
+            <ion-label>Tareas completadas</ion-label>
+        </ion-tab-button>
+
     </ion-tab-bar>
-
-    <ion-tab-button tab="done" href="">
-        <ion-icon aria-hidden="true" name="checkmark-circle-outline"></ion-icon>
-        <!--<ion-icon aria-hidden="true" name="ellipse"></ion-icon>-->
-        <ion-label>Tareas completadas</ion-label>
-    </ion-tab-button>
-
 </ion-tabs>

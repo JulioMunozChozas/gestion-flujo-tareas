@@ -15,7 +15,7 @@ import { DoingPage } from './doing.page';
     FormsModule,
     IonicModule,
     DoingPageRoutingModule
-  ],
-  declarations: [DoingPage]
+  ]
+  //declarations: [DoingPage]
 })
 export class DoingPageModule {}

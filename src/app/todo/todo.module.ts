@@ -16,7 +16,7 @@ import { TodoPage } from './todo.page';
     IonicModule,
     TodoPageRoutingModule
   ],
-  declarations: [TodoPage]
+  //declarations: [TodoPage]
 })
 export class TodoPageModule {}
 

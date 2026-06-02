@@ -16,6 +16,6 @@ import { DonePage } from './done.page';
     IonicModule,
     DonePageRoutingModule
   ],
-  declarations: [DonePage]
+  //declarations: [DonePage]
 })
 export class DonePageModule {}

@@ -12,6 +12,7 @@ import { WorkflowPage } from './workflow.page';
   imports: [
     IonicModule,
     CommonModule,
+    WorkflowPage,
     FormsModule,
     WorkflowPageRoutingModule
   ]
