@@ -1,2 +1,25 @@
 // For information on how to create your own theme, please refer to:
 // https://ionicframework.com/docs/theming/
+
+/* Para definir las variaciones del color Índigo (Base, Contraste, Sombra y Tinte) */
+
+:root {
+    --ion-color-indigo: #3949AB;
+    --ion-color-indigo-rgb: 57, 73, 171;
+    --ion-color-indigo-contrast: #ffffff;
+    --ion-color-indigo-contrast-rgb: 255, 255, 255;
+    --ion-color-indigo-shade: #324096;
+    --ion-color-indigo-tint: #4d5bbf;
+}
+
+
+/* Para mapear el color para que funcione el atributo color="indigo" */
+
+.ion-color-indigo {
+    --ion-color-base: var(--ion-color-indigo);
+    --ion-color-base-rgb: var(--ion-color-indigo-rgb);
+    --ion-color-contrast: var(--ion-color-indigo-contrast);
+    --ion-color-contrast-rgb: var(--ion-color-indigo-contrast-rgb);
+    --ion-color-shade: var(--ion-color-indigo-shade);
+    --ion-color-tint: var(--ion-color-indigo-tint);
+}

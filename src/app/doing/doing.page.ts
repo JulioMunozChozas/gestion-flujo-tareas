@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, MenuController } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -16,6 +16,7 @@ export class DoingPage implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    console.info("Parte Doing de la aplicación");
   }
 
 }

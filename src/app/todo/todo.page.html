@@ -1,32 +1,48 @@
-<ion-header [translucent]="true">
+<!-- Barra lateral del Menú completo -->
+<ion-menu contentId="main-content-doing">
+    <ion-header class="ion-no-border">
+        <ion-toolbar color="indigo">
+            <ion-title>Menú Principal</ion-title>
+        </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+        <ion-item>Crear Nueva Tarea</ion-item>
+        <ion-item>Limpiar Historial</ion-item>
+        <ion-item>Configuración</ion-item>
+    </ion-content>
+</ion-menu>
+
+<!-- Cabecera del menú -->
+<ion-header id="main-content-doing" class="ion-no-border">
     <ion-toolbar>
-        <ion-title align="center">
-            Gestión del Flujo de Trabajo
-        </ion-title>
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Gestión Flujo de Tareas</ion-title>
+        <ion-buttons slot="end">
+            <ion-button>
+                <ion-icon slot="icon-only" name="add" color="primary"></ion-icon>
+            </ion-button>
+        </ion-buttons>
     </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
-    <!--------- Realizamos el paso 3 después de los pasos 1 y 2 --------->
 
-    <ion-item>
-        <ion-label position="floating">Escribe nueva tarea:</ion-label>
-        <ion-input [(ngModel)]="input" type="text"></ion-input>
-    </ion-item>
-
-
-    <ion-item>
-        <ion-button expand="block" (click)="mostrarTareas()">
-            Añadir tarea
-        </ion-button>
-    </ion-item>
-
-    <!-- Aquí es donde visualizamos la lista de Tareas -->
+    <!-- Visualización de la lista de tareas -->
     <ion-list>
         <ion-item *ngFor="let item of listaTareas">
             {{ item }}
         </ion-item>
     </ion-list>
+
+    <!-- Botón con icono + de abajo a la derecha -->
+    <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+        <ion-fab-button>
+            <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+
 
     <app-explore-container name="Lista de tareas"></app-explore-container>
 </ion-content>
