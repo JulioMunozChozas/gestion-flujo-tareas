@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { IonHeader, IonButton } from "@ionic/angular/standalone";
 import { ExploreContainerComponentModule } from "../explore-container/explore-container.module";
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, ModalController } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { CreateTaskModalComponent } from '../create-task-modal/create-task-modal.component';
 
 @Component({
   standalone: true,
@@ -16,9 +16,19 @@ export class TodoPage implements OnInit {
   input: string = '';
   listaTareas: any[] = [];
 
-  constructor() { }
+  constructor(private modalTaskController: ModalController) { }
 
   ngOnInit() {
+  }
+
+  async modalCreaTareas() {
+    console.log("Formulario modal de crear nueva Tarea");
+     const modalNewTask = await this.modalTaskController.create({
+      component: CreateTaskModalComponent,
+      cssClass: 'create-task-modal.component.scss'
+    });
+    
+    return await modalNewTask.present();
   }
 
   mostrarTareas() {

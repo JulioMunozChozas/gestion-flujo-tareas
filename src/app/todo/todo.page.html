@@ -6,9 +6,11 @@
         </ion-toolbar>
     </ion-header>
     <ion-content class="ion-padding">
-        <ion-item>Crear Nueva Tarea</ion-item>
-        <ion-item>Limpiar Historial</ion-item>
-        <ion-item>Configuración</ion-item>
+        <ion-item [button]="true" (click)="modalCreaTareas()">
+            Crear Nueva Tarea
+        </ion-item>
+        <ion-item [button]="true">Limpiar Historial</ion-item>
+        <ion-item [button]="true">Configuración</ion-item>
     </ion-content>
 </ion-menu>
 
@@ -18,7 +20,7 @@
         <ion-buttons slot="start">
             <ion-menu-button></ion-menu-button>
         </ion-buttons>
-        <ion-title>Gestión Flujo de Tareas</ion-title>
+        <ion-title align="center">Gestión Flujo de Tareas</ion-title>
         <ion-buttons slot="end">
             <ion-button>
                 <ion-icon slot="icon-only" name="add" color="primary"></ion-icon>

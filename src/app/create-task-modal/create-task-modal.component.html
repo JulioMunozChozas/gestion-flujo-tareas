@@ -1,0 +1,19 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title align="center">Nueva Tarea</ion-title>
+        <ion-buttons slot="start">
+            <ion-button (click)="deshacerFormularioModal()">Cancelar</ion-button>
+        </ion-buttons>
+        <ion-buttons slot="end">
+            <ion-button (click)="aniadirTarea()" [strong]="true">Guardar</ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+    <form [formGroup]="miTarea">
+        <ion-item>
+            <ion-input label="Nombre de Tarea" formControlName="nombre"></ion-input>
+        </ion-item>
+    </form>
+</ion-content>
