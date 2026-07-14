@@ -18,8 +18,7 @@ export class TodoPage implements OnInit {
 
   constructor(private modalTaskController: ModalController) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   async modalCreaTareas() {
     console.log("Formulario modal de crear nueva Tarea");
@@ -28,14 +27,29 @@ export class TodoPage implements OnInit {
       cssClass: 'create-task-modal.component.scss'
     });
     
+    modalNewTask.onDidDismiss().then((respuesta) => {
+      // Validamos que venga con datos y que el rol sea 'tarea'
+      if (respuesta.data && respuesta.role === 'tarea') {
+        const nuevaTarea = respuesta.data; // Esto contiene el objeto { nombre: '...', descripcion: '...' } etc.
+        this.mostrarTareas(nuevaTarea);
+      }
+    });
+
     return await modalNewTask.present();
   }
 
-  mostrarTareas() {
-    if (this.input.trim().length > 0) {
-      this.listaTareas.push(this.input);// añadimos la tarea a la lista
-      this.input = '';// espacio en blanco
+  mostrarTareas(nuevaTarea: any) {
+    this.listaTareas.push(nuevaTarea);// añadimos la tarea a la lista
+    console.log("Tarea "+nuevaTarea.nombre+" añadida correctamente");
+
+    console.log("Nombre: "+nuevaTarea.nombre);
+    console.log("Descripción: "+nuevaTarea.descripcion);
+    
+    /*if (nuevaTarea.input.trim().length > 0){
+      
     }
+    else
+      console.error("Error al añadir la nueva tarea");*/
   }
 
 }

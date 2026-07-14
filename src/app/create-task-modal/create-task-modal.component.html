@@ -1,6 +1,7 @@
 <ion-header>
     <ion-toolbar>
         <ion-title align="center">Nueva Tarea</ion-title>
+
         <ion-buttons slot="start">
             <ion-button (click)="deshacerFormularioModal()">Cancelar</ion-button>
         </ion-buttons>
@@ -11,9 +12,32 @@
 </ion-header>
 
 <ion-content class="ion-padding">
+    <!-- Formulario de añadir tarea -->
     <form [formGroup]="miTarea">
+        <!-- Campos establecidos para el formulario -->
         <ion-item>
-            <ion-input label="Nombre de Tarea" formControlName="nombre"></ion-input>
+            <ion-input label="Nombre de la tarea *" formControlName="nombre"></ion-input>
         </ion-item>
+
+        <ion-item>
+            <ion-textarea label="Descripción (opcional)" formControlName="descripcion"></ion-textarea>
+        </ion-item>
+
+        <!--
+        <ion-item>
+            <ion-input label="Prioridad *" formControlName="prioridad"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-input label="Fecha límite (opcional)" formControlName="fecha"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-input label="Estado inicial" formControlName="estado"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-input label="Progreso inicial" formControlName="progreso"></ion-input>
+        </ion-item>-->
     </form>
 </ion-content>
