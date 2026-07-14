@@ -34,8 +34,9 @@
     <!-- Visualización de la lista de tareas -->
     <ion-list>
         <ion-item *ngFor="let miTarea of listaTareas">
-            <ion-text color="primary">
+            <ion-text>
                 <h4>Nombre: {{ miTarea.nombre }}</h4>
+                <h4>Descripción: {{ miTarea.descripcion }}</h4>
             </ion-text>
         </ion-item>
     </ion-list>
