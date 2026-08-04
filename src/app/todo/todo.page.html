@@ -22,7 +22,7 @@
         </ion-buttons>
         <ion-title align="center">Gestión Flujo de Tareas</ion-title>
         <ion-buttons slot="end">
-            <ion-button>
+            <ion-button (click)="modalCreaTareas()">
                 <ion-icon slot="icon-only" name="add" color="primary"></ion-icon>
             </ion-button>
         </ion-buttons>
@@ -31,19 +31,57 @@
 
 <ion-content [fullscreen]="true" class="ion-padding">
 
-    <!-- Visualización de la lista de tareas -->
-    <ion-list>
-        <ion-item *ngFor="let miTarea of listaTareas">
-            <ion-text>
-                <h4>Nombre: {{ miTarea.nombre }}</h4>
-                <h4>Descripción: {{ miTarea.descripcion }}</h4>
-            </ion-text>
-        </ion-item>
-    </ion-list>
+    <!-- Visualización de la lista de tareas con su diseño, a modo de tarjeta  -->
+    <ion-card class="tarea">
+        <ion-card-header>
+            <ion-card-title>
+                <div class="cabecera-tarea">
+                    <span class="indicador-prioridad"></span>
+                    <h2 class="titulo-tarea">Preparar presentación del proyecto</h2>
+                </div>
+            </ion-card-title>
+            <ion-card-subtitle>
+                Crear las diapositivas y revisar el contenido antes de la reunión del equipo.
+            </ion-card-subtitle>
+        </ion-card-header>
+
+        <ion-card-content class="lista-tareas">
+            <!-- Elemento propio de Ionic que envuelve los datos de la tarea: ion-grid -->
+            <ion-grid>
+                <!-- Mostramos tres contenidos de la tarea -->
+                <ion-row>
+                    <!-- Columna que muestra la fecha inicial de la tarea -->
+                    <ion-col size="4">
+                        <ion-icon name="calendar-outline" class="icono-tarea color-violeta"></ion-icon>
+                        <div class="fecha-limite">
+                            <p>05/08/2026</p>
+                            <p>Fecha límite</p>
+                        </div>
+                    </ion-col>
+                    <!-- Columna que muestra el tipo de prioridad de la tarea -->
+                    <ion-col size="4">
+                        <ion-icon name="flag" class="icono-tarea color-rojo"></ion-icon>
+                        <div class="tipo-prioridad">
+                            <p>Alta</p>
+                            <p>Prioridad</p>
+                        </div>
+                    </ion-col>
+                    <!-- Columna que muestra el tipo de categoría de la tarea -->
+                    <ion-col size="4">
+                        <ion-icon name="briefcase" class="icono-tarea color-violeta"></ion-icon>
+                        <div class="tipo-categoria">
+                            <p>Trabajo</p>
+                            <p>Categoría</p>
+                        </div>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-card-content>
+    </ion-card>
 
     <!-- Botón con icono + de abajo a la derecha -->
     <ion-fab slot="fixed" vertical="bottom" horizontal="end">
-        <ion-fab-button>
+        <ion-fab-button (click)="modalCreaTareas()">
             <ion-icon name="add"></ion-icon>
         </ion-fab-button>
     </ion-fab>

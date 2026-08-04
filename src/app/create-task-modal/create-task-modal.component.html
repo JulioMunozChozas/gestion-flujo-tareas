@@ -23,21 +23,30 @@
             <ion-textarea label="Descripción (opcional)" formControlName="descripcion"></ion-textarea>
         </ion-item>
 
-        <!--
         <ion-item>
-            <ion-input label="Prioridad *" formControlName="prioridad"></ion-input>
+            <ion-select label="Prioridad" formControlName="prioridad" placeholder="Prioridad">
+                <ion-select-option value="baja">Baja</ion-select-option>
+                <ion-select-option value="media">Media</ion-select-option>
+                <ion-select-option value="alta">Alta</ion-select-option>
+            </ion-select>
         </ion-item>
 
         <ion-item>
-            <ion-input label="Fecha límite (opcional)" formControlName="fecha"></ion-input>
+            <ion-input type="date" formControlName="fecha" [min]="fechaMinima" [(ngModel)]="fechaInicial" placeholder="Seleccione una fecha inicial"></ion-input>
         </ion-item>
 
         <ion-item>
-            <ion-input label="Estado inicial" formControlName="estado"></ion-input>
+            <ion-select label="Categoría (opcional)" formControlName="categoria">
+                <ion-select-option value="trabajo">Trabajo</ion-select-option>
+                <ion-select-option value="estudios">Estudios</ion-select-option>
+                <ion-select-option value="personal">Personal</ion-select-option>
+                <ion-select-option value="compras">Compras</ion-select-option>
+                <ion-select-option value="otros">Otros</ion-select-option>
+            </ion-select>
         </ion-item>
 
         <ion-item>
-            <ion-input label="Progreso inicial" formControlName="progreso"></ion-input>
-        </ion-item>-->
+            <ion-textarea label="Observaciones (opcional)" formControlName="observaciones"></ion-textarea>
+        </ion-item>
     </form>
 </ion-content>

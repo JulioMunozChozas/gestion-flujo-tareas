@@ -42,9 +42,6 @@ export class TodoPage implements OnInit {
     this.listaTareas.push(nuevaTarea);// añadimos la tarea a la lista
     console.log("Tarea "+nuevaTarea.nombre+" añadida correctamente");
 
-    console.log("Nombre: "+nuevaTarea.nombre);
-    console.log("Descripción: "+nuevaTarea.descripcion);
-    
     /*if (nuevaTarea.input.trim().length > 0){
       
     }
