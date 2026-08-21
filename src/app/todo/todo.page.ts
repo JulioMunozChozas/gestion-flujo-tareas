@@ -4,6 +4,8 @@ import { IonicModule, ModalController } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CreateTaskModalComponent } from '../create-task-modal/create-task-modal.component';
+import { addIcons } from 'ionicons';
+import { createOutline, trashOutline, eyeOutline } from 'ionicons/icons';
 
 @Component({
   standalone: true,
@@ -16,7 +18,13 @@ export class TodoPage implements OnInit {
   input: string = '';
   listaTareas: any[] = [];
 
-  constructor(private modalTaskController: ModalController) { }
+  constructor(private modalTaskController: ModalController) {
+    addIcons({
+      'create-outline': createOutline,
+      'trash-outline': trashOutline,
+      'eye-outline': eyeOutline
+    });
+  }
 
   ngOnInit() {}
 
@@ -26,7 +34,7 @@ export class TodoPage implements OnInit {
       component: CreateTaskModalComponent,
       cssClass: 'create-task-modal.component.scss'
     });
-    
+
     modalNewTask.onDidDismiss().then((respuesta) => {
       // Validamos que venga con datos y que el rol sea 'tarea'
       if (respuesta.data && respuesta.role === 'tarea') {
@@ -41,12 +49,10 @@ export class TodoPage implements OnInit {
   mostrarTareas(nuevaTarea: any) {
     this.listaTareas.push(nuevaTarea);// añadimos la tarea a la lista
     console.log("Tarea "+nuevaTarea.nombre+" añadida correctamente");
-
-    /*if (nuevaTarea.input.trim().length > 0){
-      
-    }
-    else
-      console.error("Error al añadir la nueva tarea");*/
   }
 
+  eliminarTareas() {
+    this.listaTareas = [];// para eliminar todas las tareas directamente
+    console.log("Todas las tareas se han eliminado correctamente");
+  }
 }

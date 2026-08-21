@@ -9,7 +9,7 @@
         <ion-item [button]="true" (click)="modalCreaTareas()">
             Crear Nueva Tarea
         </ion-item>
-        <ion-item [button]="true">Limpiar Historial</ion-item>
+        <ion-item [button]="true" (click)="eliminarTareas()">Limpiar Historial</ion-item>
         <ion-item [button]="true">Configuración</ion-item>
     </ion-content>
 </ion-menu>
@@ -32,50 +32,94 @@
 <ion-content [fullscreen]="true" class="ion-padding">
 
     <!-- Visualización de la lista de tareas con su diseño, a modo de tarjeta  -->
-    <ion-card class="tarea">
+    <ion-card class="tarea" *ngFor="let tarea of listaTareas; let indice = index">
         <ion-card-header>
             <ion-card-title>
                 <div class="cabecera-tarea">
-                    <span class="indicador-prioridad"></span>
-                    <h2 class="titulo-tarea">Preparar presentación del proyecto</h2>
+                    <div class="titulo-contenedor">
+                        <span [class.indicador-prioridad-alta]="tarea.prioridad === 'alta'" [class.indicador-prioridad-media]="tarea.prioridad === 'media'" [class.indicador-prioridad-baja]="tarea.prioridad === 'baja'"></span>
+                        <h2 class="titulo-tarea">{{ tarea.nombre }}</h2>
+                    </div>
+
+                    <!-- Botón del menú movido arriba a la derecha con ID dinámico -->
+                    <ion-button fill="clear" class="boton-accion-rapida">
+                        <ion-icon name="arrow-forward-circle"></ion-icon>
+                    </ion-button>
                 </div>
             </ion-card-title>
+
             <ion-card-subtitle>
-                Crear las diapositivas y revisar el contenido antes de la reunión del equipo.
+                {{ tarea.descripcion }}
             </ion-card-subtitle>
         </ion-card-header>
 
-        <ion-card-content class="lista-tareas">
+        <!-- Popover con trigger dinámico enlazado al botón de arriba -->
+        <ion-popover [trigger]="'menu-tarea-' + indice" trigger-action="click" dismiss-on-select="true">
+            <ng-template>
+                <ion-content>
+                    <!-- Visualización del menú de opciones editar, eliminar y ver detalles -->
+                    <ion-list lines="none" class="menu-opciones">
+                        <ion-item button="true" routerLink="/">
+                            <ion-icon name="create-outline" class="opcion-editar" slot="start"></ion-icon>Editar</ion-item>
+                        <ion-item button="true" routerLink="/">
+                            <ion-icon name="trash-outline" class="opcion-eliminar" slot="start"></ion-icon>Eliminar</ion-item>
+                        <ion-item button="true" routerLink="/">
+                            <ion-icon name="eye-outline" class="opcion-detalles" slot="start"></ion-icon>Ver detalles</ion-item>
+                    </ion-list>
+                </ion-content>
+            </ng-template>
+        </ion-popover>
+
+        <ion-card-content>
             <!-- Elemento propio de Ionic que envuelve los datos de la tarea: ion-grid -->
             <ion-grid>
-                <!-- Mostramos tres contenidos de la tarea -->
+                <!-- Mostramos todas las tareas -->
                 <ion-row>
                     <!-- Columna que muestra la fecha inicial de la tarea -->
                     <ion-col size="4">
-                        <ion-icon name="calendar-outline" class="icono-tarea color-violeta"></ion-icon>
+                        <ion-icon name="calendar-outline" class="icono-tarea color-fecha-limite"></ion-icon>
                         <div class="fecha-limite">
-                            <p>05/08/2026</p>
+                            <p>{{ tarea.fechaLimite | date:'dd/MM/yyyy' }}</p>
                             <p>Fecha límite</p>
                         </div>
                     </ion-col>
                     <!-- Columna que muestra el tipo de prioridad de la tarea -->
                     <ion-col size="4">
-                        <ion-icon name="flag" class="icono-tarea color-rojo"></ion-icon>
+                        <ion-icon name="flag" class="icono-tarea" [class.color-prioridad-alta]="tarea.prioridad === 'alta'" [class.color-prioridad-media]="tarea.prioridad === 'media'" [class.color-prioridad-baja]="tarea.prioridad === 'baja'"></ion-icon>
                         <div class="tipo-prioridad">
-                            <p>Alta</p>
+                            <p>{{ tarea.prioridad }}</p>
                             <p>Prioridad</p>
                         </div>
                     </ion-col>
                     <!-- Columna que muestra el tipo de categoría de la tarea -->
                     <ion-col size="4">
-                        <ion-icon name="briefcase" class="icono-tarea color-violeta"></ion-icon>
+                        <ion-icon name="briefcase" class="icono-tarea" [class.color-categoria-trabajo]="tarea.categoria === 'trabajo'" [class.color-categoria-estudios]="tarea.categoria === 'estudios'" [class.color-categoria-personal]="tarea.categoria === 'personal'" [class.color-categoria-compras]="tarea.categoria === 'compras'"
+                            [class.color-categoria-otros]="tarea.categoria === 'otros'">
+                        </ion-icon>
+
                         <div class="tipo-categoria">
-                            <p>Trabajo</p>
+                            <p>{{ tarea.categoria }}</p>
                             <p>Categoría</p>
                         </div>
                     </ion-col>
                 </ion-row>
             </ion-grid>
+
+            <!-- Visualización de estado y barra de progreso -->
+            <div class="contenedor-progreso">
+                <div class="cabecera-progreso">
+                    <span class="estado">{{ tarea.estado }}</span>
+                    <span class="porcentaje">{{ tarea.progreso }}%</span>
+                </div>
+                <!-- ion-progress-bar requiere un valor entre 0 y 1, por eso se divide entre 100 -->
+                <ion-progress-bar [value]="tarea.progreso / 100" class="barra-progreso"></ion-progress-bar>
+            </div>
+
+            <div class="pie-tarjeta-acciones">
+                <ion-button [id]="'menu-tarea-' + indice" fill="clear" class="boton-menu">
+                    <ion-icon name="ellipsis-vertical" slot="icon-only"></ion-icon>
+                </ion-button>
+            </div>
         </ion-card-content>
     </ion-card>
 
@@ -85,7 +129,6 @@
             <ion-icon name="add"></ion-icon>
         </ion-fab-button>
     </ion-fab>
-
 
     <app-explore-container name="Lista de tareas"></app-explore-container>
 </ion-content>

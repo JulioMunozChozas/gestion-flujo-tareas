@@ -6,25 +6,32 @@
             <ion-button (click)="deshacerFormularioModal()">Cancelar</ion-button>
         </ion-buttons>
         <ion-buttons slot="end">
-            <ion-button (click)="aniadirTarea()" [strong]="true">Guardar</ion-button>
+            <ion-button (click)="crearTarea()" [strong]="true" [disabled]="miTarea.invalid">Guardar</ion-button>
         </ion-buttons>
     </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
     <!-- Formulario de añadir tarea -->
-    <form [formGroup]="miTarea">
+    <form [formGroup]="miTarea" (ngSubmit)="crearTarea()">
         <!-- Campos establecidos para el formulario -->
         <ion-item>
-            <ion-input label="Nombre de la tarea *" formControlName="nombre"></ion-input>
+            <ion-input formControlName="nombre" maxlength="100">
+                <div slot="label">
+                    Nombre <span class="asterisco-obligatorio">*</span>
+                </div>
+            </ion-input>
         </ion-item>
 
         <ion-item>
-            <ion-textarea label="Descripción (opcional)" formControlName="descripcion"></ion-textarea>
+            <ion-textarea label="Descripción" formControlName="descripcion" maxLength="500"></ion-textarea>
         </ion-item>
 
         <ion-item>
-            <ion-select label="Prioridad" formControlName="prioridad" placeholder="Prioridad">
+            <ion-select formControlName="prioridad">
+                <div slot="label">
+                    Prioridad <span class="asterisco-obligatorio">*</span>
+                </div>
                 <ion-select-option value="baja">Baja</ion-select-option>
                 <ion-select-option value="media">Media</ion-select-option>
                 <ion-select-option value="alta">Alta</ion-select-option>
@@ -32,11 +39,15 @@
         </ion-item>
 
         <ion-item>
-            <ion-input type="date" formControlName="fecha" [min]="fechaMinima" [(ngModel)]="fechaInicial" placeholder="Seleccione una fecha inicial"></ion-input>
+            <ion-input type="date" label="Fecha inicial" formControlName="fechaLimite" [min]="fechaMinima">
+            </ion-input>
         </ion-item>
 
         <ion-item>
-            <ion-select label="Categoría (opcional)" formControlName="categoria">
+            <ion-select formControlName="categoria">
+                <div slot="label">
+                    Categoría <span class="asterisco-obligatorio">*</span>
+                </div>
                 <ion-select-option value="trabajo">Trabajo</ion-select-option>
                 <ion-select-option value="estudios">Estudios</ion-select-option>
                 <ion-select-option value="personal">Personal</ion-select-option>
@@ -46,7 +57,13 @@
         </ion-item>
 
         <ion-item>
-            <ion-textarea label="Observaciones (opcional)" formControlName="observaciones"></ion-textarea>
+            <ion-textarea label="Observaciones" formControlName="observaciones" maxlength="500"></ion-textarea>
         </ion-item>
+
+        <div class="ion-padding-top">
+            <ion-button expand="block" type="submit" [disabled]="miTarea.invalid">
+                Añadir Tarea
+            </ion-button>
+        </div>
     </form>
 </ion-content>

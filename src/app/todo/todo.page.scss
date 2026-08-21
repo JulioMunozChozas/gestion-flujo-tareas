@@ -5,11 +5,37 @@
     .cabecera-tarea {
         display: flex;
         align-items: center;
-        gap: 12px;
-        .indicador-prioridad {
+        justify-content: space-between;
+        width: 100%;
+        .titulo-contenedor {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .boton-menu {
+            --color: #64748b;
+            --padding-end: 0;
+            --padding-start: 0;
+            margin: 0;
+        }
+        .indicador-prioridad-alta {
             width: 16px;
             height: 16px;
-            background-color: var(--ion-color-danger);
+            background-color: #ff353e;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        .indicador-prioridad-media {
+            width: 16px;
+            height: 16px;
+            background-color: #ff9800;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        .indicador-prioridad-baja {
+            width: 16px;
+            height: 16px;
+            background-color: #34c759;
             border-radius: 50%;
             flex-shrink: 0;
         }
@@ -18,6 +44,13 @@
             font-size: 18px;
             font-weight: 600;
             color: var(--ion-text-color, #1f2937);
+        }
+        .boton-accion-rapida {
+            --color: #2563eb;
+            --padding-end: 0;
+            --padding-start: 0;
+            margin: 0;
+            ion-icon{ font-size: 32px;} // establecemos el tamaño del botón a 32px
         }
     }
     .columna-tarea {
@@ -32,13 +65,32 @@
     }
     .icono-tarea {
         font-size: 28px;
-        &.color-violeta {
-            color: #6366f1;
-            /* Color azul/púrpura de Ionic */
+        &.color-fecha-limite {
+            color: #5865f2;
         }
-        &.color-rojo {
-            color: #ff4d4d;
-            /* Color rojo para la bandera de prioridad */
+        &.color-categoria-trabajo {
+            color: #5865f2;
+        }
+        &.color-categoria-estudios {
+            color: #34c759;
+        }
+        &.color-categoria-personal {
+            color: #2563eb;
+        }
+        &.color-categoria-compras {
+            color: #ff9800;
+        }
+        &.color-categoria-otros {
+            color: #64748b;
+        }
+        &.color-prioridad-alta {
+            color: #ff353e;
+        }
+        &.color-prioridad-media {
+            color: #ff9800;
+        }
+        &.color-prioridad-baja {
+            color: #34c759;
         }
     }
     .texto-tarea {
@@ -53,5 +105,56 @@
             font-size: 12px;
             color: #6b7280;
         }
+    }
+    .pie-tarjeta-acciones {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 8px;
+        .boton-menu {
+            --color: #64748b;
+            --padding-end: 0;
+            --padding-start: 0;
+            margin: 0;
+            height: 32px;
+        }
+    }
+}
+
+.contenedor-progreso {
+    margin-top: 16px;
+    .cabecera-progreso {
+        display: flex;
+        justify-content: space-between; // Separa "To Do" a la izquierda y "0%" a la derecha
+        align-items: center;
+        margin-bottom: 6px; // Evita que el texto toque la barra
+        .estado {
+            font-size: 13px;
+            font-weight: 600;
+            color: #4a5568; // Gris oscuro profesional
+        }
+        .porcentaje {
+            font-size: 12px;
+            font-weight: 500;
+            color: #718096; // Gris medio sutil
+        }
+    }
+    .barra-progreso {
+        height: 6px;
+        border-radius: 4px; // Bordes redondeados modernos
+    }
+}
+
+
+/* Menú para las opciones editar, eliminar y ver detalles */
+
+.menu-opciones {
+    .opcion-editar {
+        color: #2563eb;
+    }
+    .opcion-eliminar {
+        color: #ff353e;
+    }
+    .opcion-detalles {
+        color: #64748b;
     }
 }
