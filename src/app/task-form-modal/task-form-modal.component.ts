@@ -5,9 +5,9 @@ import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, Validatio
 import { IonHeader, IonToolbar, IonTitle, IonButtons, IonButton, IonContent, IonItem, IonInput, IonTextarea } from '@ionic/angular/standalone';
 
 @Component({
-  selector: 'app-create-task-modal',
-  templateUrl: './create-task-modal.component.html',
-  styleUrls: ['./create-task-modal.component.scss'],
+  selector: 'app-task-form-modal',
+  templateUrl: './task-form-modal.component.html',
+  styleUrls: ['./task-form-modal.component.scss'],
   standalone: true,
   imports: [IonTextarea,
     IonHeader,
@@ -23,7 +23,7 @@ import { IonHeader, IonToolbar, IonTitle, IonButtons, IonButton, IonContent, Ion
     ReactiveFormsModule
   ]
 })
-export class CreateTaskModalComponent  implements OnInit {
+export class TaskFormModalComponent implements OnInit {
   miTarea: FormGroup;
   listaTareas: any[] = [];
   // Fecha con el formato "YYYY-MM-DD"

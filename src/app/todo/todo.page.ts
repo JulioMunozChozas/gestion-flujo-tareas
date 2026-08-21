@@ -3,7 +3,7 @@ import { ExploreContainerComponentModule } from "../explore-container/explore-co
 import { IonicModule, ModalController } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { CreateTaskModalComponent } from '../create-task-modal/create-task-modal.component';
+import { TaskFormModalComponent } from '../task-form-modal/task-form-modal.component';
 import { addIcons } from 'ionicons';
 import { createOutline, trashOutline, eyeOutline } from 'ionicons/icons';
 
@@ -29,26 +29,26 @@ export class TodoPage implements OnInit {
   ngOnInit() {}
 
   async modalCreaTareas() {
-    console.log("Formulario modal de crear nueva Tarea");
-     const modalNewTask = await this.modalTaskController.create({
-      component: CreateTaskModalComponent,
-      cssClass: 'create-task-modal.component.scss'
+    console.log("Formulario modal de Tarea");
+     const modalTask = await this.modalTaskController.create({
+      component: TaskFormModalComponent,
+      cssClass: 'task-form-modal.component.scss'
     });
 
-    modalNewTask.onDidDismiss().then((respuesta) => {
+    modalTask.onDidDismiss().then((respuesta) => {
       // Validamos que venga con datos y que el rol sea 'tarea'
       if (respuesta.data && respuesta.role === 'tarea') {
         const nuevaTarea = respuesta.data; // Esto contiene el objeto { nombre: '...', descripcion: '...' } etc.
-        this.mostrarTareas(nuevaTarea);
+        this.aniadirTareas(nuevaTarea);
       }
     });
 
-    return await modalNewTask.present();
+    return await modalTask.present();
   }
 
-  mostrarTareas(nuevaTarea: any) {
-    this.listaTareas.push(nuevaTarea);// añadimos la tarea a la lista
-    console.log("Tarea "+nuevaTarea.nombre+" añadida correctamente");
+  aniadirTareas(NuevaTarea: any) {
+    this.listaTareas.push(NuevaTarea);// añadimos la tarea a la lista
+    console.log("Tarea "+NuevaTarea.nombre+" añadida correctamente");
   }
 
   eliminarTareas() {
