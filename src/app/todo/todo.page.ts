@@ -29,27 +29,60 @@ export class TodoPage implements OnInit {
   ngOnInit() {}
 
   async modalCreaTareas() {
-    console.log("Formulario modal de Tarea");
      const modalTask = await this.modalTaskController.create({
       component: TaskFormModalComponent,
       cssClass: 'task-form-modal.component.scss'
     });
 
-    modalTask.onDidDismiss().then((respuesta) => {
-      // Validamos que venga con datos y que el rol sea 'tarea'
-      if (respuesta.data && respuesta.role === 'tarea') {
-        const nuevaTarea = respuesta.data; // Esto contiene el objeto { nombre: '...', descripcion: '...' } etc.
-        this.aniadirTareas(nuevaTarea);
-      }
-    });
+    await modalTask.present();
 
-    return await modalTask.present();
+    // Recogemos la tarea cuando el usuario pulsa "Añadir Tarea"
+    const { data } = await modalTask.onWillDismiss();
+    if (data) {
+      data.id = crypto.randomUUID(); // Generamos Id a la nueva tarea con número UUID generado aleatoriamente
+      this.aniadirTareas(data); // Añadimos la nueva tarea
+    }
   }
 
   aniadirTareas(NuevaTarea: any) {
     this.listaTareas.push(NuevaTarea);// añadimos la tarea a la lista
     console.log("Tarea "+NuevaTarea.nombre+" añadida correctamente");
   }
+
+
+  editarTarea(tareaActualSeleccionada: any) {
+    // Abrimos el formulario del modal para editar la tarea seleccionada
+    if (tareaActualSeleccionada) {
+      console.log("Formulario editar tarea "+tareaActualSeleccionada.nombre);
+      this.modalEditaTareas(tareaActualSeleccionada);
+    }
+  }
+
+  async modalEditaTareas(tarea: any) {
+    console.log("Formulario modal de Tarea");
+     const modalTask = await this.modalTaskController.create({
+      component: TaskFormModalComponent,
+      cssClass: 'task-form-modal.component.scss',
+      componentProps: {
+        tareaSeleccionada: tarea, //le pasamos la tarea seleccionada
+      }
+    });
+
+    await modalTask.present();
+
+    const {data, role } = await modalTask.onDidDismiss();// al cerrar el modal recogemos los datos
+
+    if (role === 'confirm' && data) {
+      const index = this.listaTareas.findIndex(tarea => tarea.id === data.id);
+    
+      if (index !== -1) {
+        this.listaTareas[index] = data;// editamos la tarea seleccionada
+        this.listaTareas = [...this.listaTareas];// recargamos las tareas nuevamente
+        console.log('Tarea '+data.nombre+' editada correctamente');// mensaje de tarea editada correctamente mostrado
+      }
+    }
+  }
+
 
   eliminarTareas() {
     this.listaTareas = [];// para eliminar todas las tareas directamente

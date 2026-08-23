@@ -1,19 +1,19 @@
 <ion-header>
     <ion-toolbar>
-        <ion-title align="center">Nueva Tarea</ion-title>
+        <ion-title align="center">{{ tareaSeleccionada ? 'Editar' : 'Nueva' }} Tarea</ion-title>
 
         <ion-buttons slot="start">
             <ion-button (click)="deshacerFormularioModal()">Cancelar</ion-button>
         </ion-buttons>
         <ion-buttons slot="end">
-            <ion-button (click)="crearTarea()" [strong]="true" [disabled]="miTarea.invalid">Guardar</ion-button>
+            <ion-button (click)="guardarTarea()" [strong]="true" [disabled]="miTarea.invalid">Guardar</ion-button>
         </ion-buttons>
     </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
     <!-- Formulario de añadir tarea -->
-    <form [formGroup]="miTarea" (ngSubmit)="crearTarea()">
+    <form [formGroup]="miTarea" (ngSubmit)="guardarTarea()">
         <!-- Campos establecidos para el formulario -->
         <ion-item>
             <ion-input formControlName="nombre" maxlength="100">
@@ -62,7 +62,7 @@
 
         <div class="ion-padding-top">
             <ion-button expand="block" type="submit" [disabled]="miTarea.invalid">
-                Añadir Tarea
+                {{ tareaSeleccionada ? 'Editar' : 'Añadir' }} Tarea
             </ion-button>
         </div>
     </form>

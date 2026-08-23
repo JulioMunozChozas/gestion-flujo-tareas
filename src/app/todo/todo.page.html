@@ -59,7 +59,7 @@
                 <ion-content>
                     <!-- Visualización del menú de opciones editar, eliminar y ver detalles -->
                     <ion-list lines="none" class="menu-opciones">
-                        <ion-item button="true" routerLink="/">
+                        <ion-item button="true" (click)="editarTarea(tarea)">
                             <ion-icon name="create-outline" class="opcion-editar" slot="start"></ion-icon>Editar</ion-item>
                         <ion-item button="true" routerLink="/">
                             <ion-icon name="trash-outline" class="opcion-eliminar" slot="start"></ion-icon>Eliminar</ion-item>

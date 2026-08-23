@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { IonSelect, IonSelectOption } from '@ionic/angular/standalone';
 import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
@@ -30,6 +30,15 @@ export class TaskFormModalComponent implements OnInit {
   fechaInicial: string = new Date().toLocaleDateString('sv-SE');
   fechaMinima = new Date();
 
+  @Input() tareaSeleccionada: any;// para mostrar el formulario de editar tarea seleccionada
+  nombreTarea: string = '';
+  descripcionTarea: string = '';
+  prioridadTarea: string = '';
+  fechaLimiteTarea: Date = new Date();
+  categoriaTarea: string = '';
+  observacionesTarea: string = '';
+
+
   constructor(
     private modalTaskController: ModalController,
     private taskBuilder: FormBuilder
@@ -56,6 +65,8 @@ export class TaskFormModalComponent implements OnInit {
 
   ngOnInit() {
     console.log("Formulario modal de Tareas");
+
+    this.mostrarFormularioModalEdicion();// mostramos los datos del formulario de editar tarea
   }
 
   deshacerFormularioModal() {
@@ -73,13 +84,50 @@ export class TaskFormModalComponent implements OnInit {
     return abstractControl.value >= fechaActual ? null : { fechaPasada: true };
   }
 
-  crearTarea() {
-    if (this.miTarea.valid) {
-      // Envía los datos del formulario y el rol 'tarea'
-      this.modalTaskController.dismiss(this.miTarea.value, 'tarea');
-      console.log("Tarea "+this.miTarea.value.nombre+" añadida correctamente");
+  mostrarFormularioModalEdicion() {
+    /** Para cuándo estemos en el formulario modal a la hora de editar una tarea seleccionada */
+    if (this.tareaSeleccionada) {
+      let fechaFormateada = '';
+
+      if (this.tareaSeleccionada.fechaLimite)
+      fechaFormateada = new Date(this.tareaSeleccionada.fechaLimite).toISOString().split('T')[0];
+
+    // Parcheamos la fecha existente desde la parte de editar formulario
+    if (this.tareaSeleccionada) {
+      this.miTarea.patchValue({
+        nombre: this.tareaSeleccionada.nombre,
+        descripcion: this.tareaSeleccionada.descripcion,
+        prioridad: this.tareaSeleccionada.prioridad,
+        fechaLimite: this.tareaSeleccionada.fechaLimite ? new Date(this.tareaSeleccionada.fechaLimite).toISOString() : '',
+        categoria: this.tareaSeleccionada.categoria,
+        observaciones: this.tareaSeleccionada.observaciones,
+      });
     }
-    else
-      console.error("Error al añadir la tarea "+this.miTarea.value.nombre);
+    }
+  }
+  guardarTarea() {
+    if (this.miTarea.valid) {
+      // Pasamos los datos del formulario de vuelta a la página principal
+      // Si estamos editando, le devolvemos también el ID para saber cuál actualizar
+      const tarea = {
+        ...this.miTarea.value,
+        id: this.tareaSeleccionada ? this.tareaSeleccionada.id : null
+      };
+
+      this.modalTaskController.dismiss(tarea, 'confirm');
+    }
+  }
+
+  editarTarea() {
+    let fechaFormateada = this.tareaSeleccionada.fechaLimite;
+    if (fechaFormateada) {
+      fechaFormateada = new Date(fechaFormateada).toISOString();
+    }
+
+    // patchValue mapea las propiedades con los controles del formulario
+    this.miTarea.patchValue({
+      ...this.tareaSeleccionada,
+      fechaLimite: fechaFormateada
+    });
   }
 }
