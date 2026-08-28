@@ -1,160 +1,244 @@
-.tarea {
-    border-top: 1px solid #e5e7eb;
-    /* Línea horizontal superior */
-    padding-top: 12px;
-    .cabecera-tarea {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        width: 100%;
-        .titulo-contenedor {
+    .tarea {
+        border-top: 1px solid #e5e7eb;
+        /* Línea horizontal superior */
+        padding-top: 12px;
+        .cabecera-tarea {
             display: flex;
             align-items: center;
-            gap: 12px;
+            justify-content: space-between;
+            width: 100%;
+            .titulo-contenedor {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+            }
+            .boton-menu {
+                --color: #64748b;
+                --padding-end: 0;
+                --padding-start: 0;
+                margin: 0;
+            }
+            .indicador-prioridad-alta {
+                width: 16px;
+                height: 16px;
+                background-color: #ff353e;
+                border-radius: 50%;
+                flex-shrink: 0;
+            }
+            .indicador-prioridad-media {
+                width: 16px;
+                height: 16px;
+                background-color: #ff9800;
+                border-radius: 50%;
+                flex-shrink: 0;
+            }
+            .indicador-prioridad-baja {
+                width: 16px;
+                height: 16px;
+                background-color: #34c759;
+                border-radius: 50%;
+                flex-shrink: 0;
+            }
+            .titulo-tarea {
+                margin: 0px;
+                font-size: 18px;
+                font-weight: 600;
+                color: var(--ion-text-color, #1f2937);
+            }
+            .boton-accion-rapida {
+                --color: #2563eb;
+                --padding-end: 0;
+                --padding-start: 0;
+                margin: 0;
+                ion-icon {
+                    font-size: 32px;
+                } // establecemos el tamaño del botón a 32px
+            }
         }
-        .boton-menu {
-            --color: #64748b;
-            --padding-end: 0;
-            --padding-start: 0;
-            margin: 0;
+        .columna-tarea {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            /* Línea vertical separadora entre columnas */
+            &.borde-izquierdo {
+                border-left: 1px solid #e5e7eb;
+            }
         }
-        .indicador-prioridad-alta {
-            width: 16px;
-            height: 16px;
-            background-color: #ff353e;
-            border-radius: 50%;
-            flex-shrink: 0;
+        .icono-tarea {
+            font-size: 28px;
+            &.color-fecha-limite {
+                color: #5865f2;
+            }
+            &.color-categoria-trabajo {
+                color: #5865f2;
+            }
+            &.color-categoria-estudios {
+                color: #34c759;
+            }
+            &.color-categoria-personal {
+                color: #2563eb;
+            }
+            &.color-categoria-compras {
+                color: #ff9800;
+            }
+            &.color-categoria-otros {
+                color: #64748b;
+            }
+            &.color-prioridad-alta {
+                color: #ff353e;
+            }
+            &.color-prioridad-media {
+                color: #ff9800;
+            }
+            &.color-prioridad-baja {
+                color: #34c759;
+            }
         }
-        .indicador-prioridad-media {
-            width: 16px;
-            height: 16px;
-            background-color: #ff9800;
-            border-radius: 50%;
-            flex-shrink: 0;
+        .texto-tarea {
+            display: flex;
+            flex-direction: column;
+            .nombre-tarea {
+                font-size: 15px;
+                font-weight: 600;
+                color: #1f2937;
+            }
+            .descripcion-tarea {
+                font-size: 12px;
+                color: #6b7280;
+            }
         }
-        .indicador-prioridad-baja {
-            width: 16px;
-            height: 16px;
-            background-color: #34c759;
-            border-radius: 50%;
-            flex-shrink: 0;
-        }
-        .titulo-tarea {
-            margin: 0px;
-            font-size: 18px;
-            font-weight: 600;
-            color: var(--ion-text-color, #1f2937);
-        }
-        .boton-accion-rapida {
-            --color: #2563eb;
-            --padding-end: 0;
-            --padding-start: 0;
-            margin: 0;
-            ion-icon{ font-size: 32px;} // establecemos el tamaño del botón a 32px
+        .pie-tarjeta-acciones {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 8px;
+            .boton-menu {
+                --color: #64748b;
+                --padding-end: 0;
+                --padding-start: 0;
+                margin: 0;
+                height: 32px;
+            }
         }
     }
-    .columna-tarea {
+    
+    .contenedor-progreso {
+        margin-top: 16px;
+        .cabecera-progreso {
+            display: flex;
+            justify-content: space-between; // Separa "To Do" a la izquierda y "0%" a la derecha
+            align-items: center;
+            margin-bottom: 6px; // Evita que el texto toque la barra
+            .estado {
+                font-size: 13px;
+                font-weight: 600;
+                color: #4a5568; // Gris oscuro profesional
+            }
+            .porcentaje {
+                font-size: 12px;
+                font-weight: 500;
+                color: #718096; // Gris medio sutil
+            }
+        }
+        .barra-progreso {
+            height: 6px;
+            border-radius: 4px; // Bordes redondeados modernos
+        }
+    }
+    /* Menú para las opciones editar, eliminar y ver detalles */
+    
+    .menu-opciones {
+        .opcion-editar {
+            color: #2563eb;
+        }
+        .opcion-eliminar {
+            color: #ff353e;
+        }
+        .opcion-detalles {
+            color: #64748b;
+        }
+    }
+    /* Estructura del formulario modal */
+    
+    ion-modal.modal-confirmacion-eliminar {
+        --width: 330px;
+        --height: auto;
+        --border-radius: 20px;
+        --box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2);
+        .contenedor-modal {
+            padding: 24px 20px 20px 20px;
+            background: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+    }
+    
+    .icono-cabecera {
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 10px;
-        /* Línea vertical separadora entre columnas */
-        &.borde-izquierdo {
-            border-left: 1px solid #e5e7eb;
+        background-color: #fee2e2;
+        width: 64px;
+        height: 64px;
+        border-radius: 50%;
+        margin-bottom: 16px;
+        ion-icon {
+            color: #ef4444;
+            font-size: 32px;
         }
     }
-    .icono-tarea {
-        font-size: 28px;
-        &.color-fecha-limite {
-            color: #5865f2;
-        }
-        &.color-categoria-trabajo {
-            color: #5865f2;
-        }
-        &.color-categoria-estudios {
-            color: #34c759;
-        }
-        &.color-categoria-personal {
-            color: #2563eb;
-        }
-        &.color-categoria-compras {
-            color: #ff9800;
-        }
-        &.color-categoria-otros {
-            color: #64748b;
-        }
-        &.color-prioridad-alta {
-            color: #ff353e;
-        }
-        &.color-prioridad-media {
-            color: #ff9800;
-        }
-        &.color-prioridad-baja {
-            color: #34c759;
+    
+    .titulo-modal {
+        font-size: 20px;
+        font-weight: 700;
+        color: #111827;
+        margin: 0 0 8px 0;
+    }
+    
+    .subtitulo-modal {
+        font-size: 13.5px;
+        color: #6b7280;
+        margin: 0 0 6px 0;
+    }
+    
+    .mensaje-confirmacion {
+        font-size: 13.5px;
+        color: #4b5563;
+        margin: 0 0 20px 0;
+        line-height: 1.4;
+        .nombre-tarea-destacado {
+            color: #ef4444;
+            font-weight: 700;
         }
     }
-    .texto-tarea {
+    /* Para poner los botones en horizontal */
+    
+    .acciones-modal {
         display: flex;
-        flex-direction: column;
-        .nombre-tarea {
-            font-size: 15px;
-            font-weight: 600;
-            color: #1f2937;
-        }
-        .descripcion-tarea {
-            font-size: 12px;
-            color: #6b7280;
-        }
+        gap: 12px;
+        width: 100%;
     }
-    .pie-tarjeta-acciones {
-        display: flex;
-        justify-content: flex-end;
-        margin-top: 8px;
-        .boton-menu {
-            --color: #64748b;
-            --padding-end: 0;
-            --padding-start: 0;
-            margin: 0;
-            height: 32px;
-        }
+    
+    .boton-cancelar,
+    .boton-eliminar {
+        flex: 1;
+        height: 44px;
+        border-radius: 8px;
+        font-size: 15px;
+        font-weight: 600;
+        cursor: pointer;
     }
-}
-
-.contenedor-progreso {
-    margin-top: 16px;
-    .cabecera-progreso {
-        display: flex;
-        justify-content: space-between; // Separa "To Do" a la izquierda y "0%" a la derecha
-        align-items: center;
-        margin-bottom: 6px; // Evita que el texto toque la barra
-        .estado {
-            font-size: 13px;
-            font-weight: 600;
-            color: #4a5568; // Gris oscuro profesional
-        }
-        .porcentaje {
-            font-size: 12px;
-            font-weight: 500;
-            color: #718096; // Gris medio sutil
-        }
+    
+    .boton-cancelar {
+        color: #374151;
+        border: 1px solid #d1d5db;
+        background: #ffffff;
     }
-    .barra-progreso {
-        height: 6px;
-        border-radius: 4px; // Bordes redondeados modernos
+    
+    .boton-eliminar {
+        color: #ffffff;
+        border: none;
+        background: #ef4444;
     }
-}
-
-
-/* Menú para las opciones editar, eliminar y ver detalles */
-
-.menu-opciones {
-    .opcion-editar {
-        color: #2563eb;
-    }
-    .opcion-eliminar {
-        color: #ff353e;
-    }
-    .opcion-detalles {
-        color: #64748b;
-    }
-}

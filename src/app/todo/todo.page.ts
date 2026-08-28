@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ExploreContainerComponentModule } from "../explore-container/explore-container.module";
 import { IonicModule, ModalController } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
@@ -13,10 +13,15 @@ import { createOutline, trashOutline, eyeOutline } from 'ionicons/icons';
   templateUrl: './todo.page.html',
   styleUrls: ['./todo.page.scss'],
   imports: [IonicModule, CommonModule, FormsModule, ExploreContainerComponentModule],
+  encapsulation: ViewEncapsulation.None // Permite que los estilos de este archivo salgan al DOM global
 })
 export class TodoPage implements OnInit {
   input: string = '';
   listaTareas: any[] = [];
+  botonConfirmacion: any[] = [];
+  // Variables para el diseño del mensaje de confirmación
+  modalConfirmacionEliminar = false;
+  tareaSeleccionada: any = null;
 
   constructor(private modalTaskController: ModalController) {
     addIcons({
@@ -50,14 +55,6 @@ export class TodoPage implements OnInit {
   }
 
 
-  editarTarea(tareaActualSeleccionada: any) {
-    // Abrimos el formulario del modal para editar la tarea seleccionada
-    if (tareaActualSeleccionada) {
-      console.log("Formulario editar tarea "+tareaActualSeleccionada.nombre);
-      this.modalEditaTareas(tareaActualSeleccionada);
-    }
-  }
-
   async modalEditaTareas(tarea: any) {
     console.log("Formulario modal de Tarea");
      const modalTask = await this.modalTaskController.create({
@@ -74,7 +71,7 @@ export class TodoPage implements OnInit {
 
     if (role === 'confirm' && data) {
       const index = this.listaTareas.findIndex(tarea => tarea.id === data.id);
-    
+
       if (index !== -1) {
         this.listaTareas[index] = data;// editamos la tarea seleccionada
         this.listaTareas = [...this.listaTareas];// recargamos las tareas nuevamente
@@ -83,9 +80,46 @@ export class TodoPage implements OnInit {
     }
   }
 
+  editarTarea(tareaActualSeleccionada: any) {
+    // Abrimos el formulario del modal para editar la tarea seleccionada
+    if (tareaActualSeleccionada) {
+      console.log("Formulario editar tarea "+tareaActualSeleccionada.nombre);
+      this.modalEditaTareas(tareaActualSeleccionada);
+    }
+  }
+
+
+/* Métodos que pertenecen al mensaje de confirmación del modal */
+  modalEliminaTarea(tarea: any) {
+    this.tareaSeleccionada = tarea;
+    this.modalConfirmacionEliminar = true;
+  }
+
+  cancelarEliminar() {
+    this.modalConfirmacionEliminar = false;
+    this.tareaSeleccionada = null;
+  }
+
+  confirmarEliminar() {
+    if (this.tareaSeleccionada)
+      this.eliminarTarea(this.tareaSeleccionada);
+    this.cancelarEliminar();
+  }
+
+
+  eliminarTarea(tareaActualSeleccionada: any) {
+    try{
+      this.listaTareas = this.listaTareas.filter(tarea => tarea !== tareaActualSeleccionada);// acción de eliminar la tarea
+      console.log("Tarea "+tareaActualSeleccionada.nombre+" eliminada correctamente");
+    }
+    catch(error){
+      console.error("Error producido al elimina la tarea "+tareaActualSeleccionada.nombre);
+    }
+  }
+
 
   eliminarTareas() {
-    this.listaTareas = [];// para eliminar todas las tareas directamente
+    this.listaTareas = [];// para eliminar todas las tareas directamente (Limpiar Historial)
     console.log("Todas las tareas se han eliminado correctamente");
   }
 }

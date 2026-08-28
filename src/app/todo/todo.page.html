@@ -61,8 +61,8 @@
                     <ion-list lines="none" class="menu-opciones">
                         <ion-item button="true" (click)="editarTarea(tarea)">
                             <ion-icon name="create-outline" class="opcion-editar" slot="start"></ion-icon>Editar</ion-item>
-                        <ion-item button="true" routerLink="/">
-                            <ion-icon name="trash-outline" class="opcion-eliminar" slot="start"></ion-icon>Eliminar</ion-item>
+                        <ion-item button="true" (click)="modalEliminaTarea(tarea)">
+                            <ion-icon name="trash-outline" class="opcion-eliminar" slot="start" color="danger"></ion-icon>Eliminar</ion-item>
                         <ion-item button="true" routerLink="/">
                             <ion-icon name="eye-outline" class="opcion-detalles" slot="start"></ion-icon>Ver detalles</ion-item>
                     </ion-list>
@@ -129,6 +129,26 @@
             <ion-icon name="add"></ion-icon>
         </ion-fab-button>
     </ion-fab>
+
+    <ion-modal [isOpen]="modalConfirmacionEliminar" class="modal-confirmacion-eliminar" (didDismiss)="cancelarEliminar()">
+        <ng-template>
+            <div class="contenedor-modal">
+                <div class="icono-cabecera">
+                    <ion-icon name="trash-outline"></ion-icon>
+                </div>
+                <h2 class="titulo-modal">¿Eliminar tarea?</h2>
+                <p class="subtitulo-modal">Esta acción no se puede deshacer.</p>
+                <p class="mensaje-confirmacion">
+                    ¿Estás seguro de que deseas eliminar la tarea<br>
+                    <strong class="nombre-tarea-destacado">"{{ tareaSeleccionada?.nombre }}"</strong>?
+                </p>
+                <div class="acciones-modal">
+                    <button class="boton-cancelar" (click)="cancelarEliminar()">Cancelar</button>
+                    <button class="boton-eliminar" (click)="confirmarEliminar()">Eliminar</button>
+                </div>
+            </div>
+        </ng-template>
+    </ion-modal>
 
     <app-explore-container name="Lista de tareas"></app-explore-container>
 </ion-content>
