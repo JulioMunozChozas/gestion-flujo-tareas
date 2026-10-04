@@ -1,0 +1,138 @@
+<!-- Para visualizar los detalles de la tarea -->
+<ion-header class="ion-no-border">
+    <ion-toolbar>
+        <ion-title>Detalle de la tarea</ion-title>
+        <ion-buttons slot="end">
+            <ion-button color="primary" (click)="cerrarModalDetalles()">
+                <ion-text color="primary">CERRAR</ion-text>
+                <ion-icon slot="end" name="close-outline"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="contenedor-tarea-seleccionada">
+    <div class="nombre-tarea">
+        <div class="icono-nombre">
+            <ion-icon name="newspaper-outline"></ion-icon>
+        </div>
+
+        <div class="texto-nombre">
+            <span class="etiqueta-nombre">Nombre</span>
+            <span class="valor-nombre">{{ tareaSeleccionada?.nombre }}</span>
+        </div>
+    </div>
+
+    <div class="descripcion-tarea">
+        <div class="icono-descripcion">
+            <ion-icon name="document-text"></ion-icon>
+        </div>
+        <div class="texto-descripcion">
+            <span class="etiqueta-descripcion">Descripción</span>
+            <span class="valor-descripcion">{{ tareaSeleccionada?.descripcion }}</span>
+        </div>
+    </div>
+
+    <div class="prioridad-tarea">
+        <div class="icono-prioridad" [ngClass]="tareaSeleccionada?.prioridad?.toLowerCase()">
+            <ion-icon name="flag"></ion-icon>
+        </div>
+        <div class="texto-prioridad">
+            <span class="etiqueta-prioridad">Prioridad</span>
+            <span class="valor-prioridad" [ngClass]="tareaSeleccionada?.prioridad?.toLowerCase()">
+                  {{ tareaSeleccionada?.prioridad }}
+                </span>
+        </div>
+    </div>
+
+    <div class="fecha-tarea">
+        <div class="icono-fecha">
+            <ion-icon name="calendar-outline"></ion-icon>
+        </div>
+        <div class="texto-fecha">
+            <span class="etiqueta-fecha">Fecha límite</span>
+            <span class="valor-fecha">
+                  {{ tareaSeleccionada?.fechaLimite | date:'dd/MM/yyyy (EEEE)':'':'es-ES' }}
+                </span>
+        </div>
+    </div>
+
+    <div class="categoria-tarea">
+        <div class="icono-categoria">
+            <ion-icon *ngIf="tareaSeleccionada?.categoria?.toLowerCase() === 'trabajo'" name="briefcase" class="color-categoria-trabajo"></ion-icon>
+            <ion-icon *ngIf="tareaSeleccionada?.categoria?.toLowerCase() === 'estudios'" name="school" class="color-categoria-estudios"></ion-icon>
+            <ion-icon *ngIf="tareaSeleccionada?.categoria?.toLowerCase() === 'personal'" name="home" class="color-categoria-personal"></ion-icon>
+            <ion-icon *ngIf="tareaSeleccionada?.categoria?.toLowerCase() === 'compras'" name="cart" class="color-categoria-compras"></ion-icon>
+            <ion-icon *ngIf="tareaSeleccionada?.categoria?.toLowerCase() === 'otros'" src="assets/icon/otros.svg" class="color-categoria-otros"></ion-icon>
+        </div>
+        <div class="texto-categoria">
+            <span class="etiqueta-categoria">Categoría</span>
+            <span class="valor-categoria" [ngClass]="tareaSeleccionada?.categoria">
+                  {{ tareaSeleccionada?.categoria }}
+                </span>
+        </div>
+    </div>
+
+    <div class="estado-tarea">
+        <div class="icono-estado">
+            <ion-icon name="hourglass-outline"></ion-icon>
+        </div>
+        <div class="texto-estado">
+            <span class="etiqueta-estado">Estado</span>
+            <span class="valor-estado" [ngClass]="obtenerEstado(tareaSeleccionada?.estado)">
+                  {{ tareaSeleccionada?.estado }}
+                </span>
+        </div>
+    </div>
+
+    <div class="progreso-tarea">
+        <div class="icono-progreso">
+            <ion-icon src="assets/icon/mi-pie-chart.svg"></ion-icon>
+        </div>
+        <div class="texto-progreso">
+            <div class="encabezado-progreso">
+                <span class="etiqueta-progreso">Progreso</span>
+                <span class="valor-progreso">
+                {{ tareaSeleccionada?.progreso }}%
+            </span>
+            </div>
+            <div class="barra-progreso-fondo">
+                <div class="barra-progreso-relleno" [style.width.%]="tareaSeleccionada?.progreso"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="observaciones-tarea">
+        <div class="icono-observaciones">
+            <ion-icon name="chatbubble-ellipses"></ion-icon>
+        </div>
+        <div class="texto-observaciones">
+            <span class="etiqueta-observaciones">Observaciones</span>
+            <span class="valor-observaciones">
+                  {{ tareaSeleccionada?.observaciones }}
+                </span>
+        </div>
+    </div>
+
+    <div class="contenedor-creacion-tarea">
+        <div class="icono-informacion">
+            <ion-icon name="information-circle-outline"></ion-icon>
+        </div>
+
+        <div class="bloque-fecha">
+            <span class="etiqueta">Creada el</span>
+            <span class="valor">{{ tareaSeleccionada?.fechaCreacion | date:'dd/MM/yyyy HH:mm' }}</span>
+        </div>
+
+        <div class="separador-vertical"></div>
+
+        <div class="bloque-fecha">
+            <span class="etiqueta">Última actualización</span>
+            <span class="valor">{{ tareaSeleccionada?.fechaActualizacion | date:'dd/MM/yyyy HH:mm' }}</span>
+        </div>
+    </div>
+
+    <ion-button expand="block" class="boton-cerrar" (click)="cerrarModalDetalles()">
+        <ion-text color="primary">CERRAR</ion-text>
+    </ion-button>
+</ion-content>

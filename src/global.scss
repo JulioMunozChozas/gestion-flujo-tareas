@@ -43,3 +43,14 @@
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 
 @import "@ionic/angular/css/palettes/dark.system.css";
+
+/* Recuadro de ver Detalles de la Tarea redimensionado correctamente */
+
+ion-modal.modal-detalles-tarea {
+    --height: fit-content !important;
+    --max-height: 95vh !important;
+    --border-radius: 16px;
+    &::part(content) {
+        height: fit-content !important;
+    }
+}

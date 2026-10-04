@@ -63,7 +63,7 @@
                             <ion-icon name="create-outline" class="opcion-editar" slot="start"></ion-icon>Editar</ion-item>
                         <ion-item button="true" (click)="modalEliminaTarea(tarea)">
                             <ion-icon name="trash-outline" class="opcion-eliminar" slot="start" color="danger"></ion-icon>Eliminar</ion-item>
-                        <ion-item button="true" routerLink="/">
+                        <ion-item button="true" (click)="mostrarDetallesTarea(tarea)">
                             <ion-icon name="eye-outline" class="opcion-detalles" slot="start"></ion-icon>Ver detalles</ion-item>
                     </ion-list>
                 </ion-content>
@@ -93,9 +93,13 @@
                     </ion-col>
                     <!-- Columna que muestra el tipo de categoría de la tarea -->
                     <ion-col size="4">
-                        <ion-icon name="briefcase" class="icono-tarea" [class.color-categoria-trabajo]="tarea.categoria === 'trabajo'" [class.color-categoria-estudios]="tarea.categoria === 'estudios'" [class.color-categoria-personal]="tarea.categoria === 'personal'" [class.color-categoria-compras]="tarea.categoria === 'compras'"
-                            [class.color-categoria-otros]="tarea.categoria === 'otros'">
-                        </ion-icon>
+                        <div class="icono-tarea">
+                            <ion-icon *ngIf="tarea.categoria === 'trabajo'" name="briefcase" class="color-categoria-trabajo"></ion-icon>
+                            <ion-icon *ngIf="tarea.categoria === 'estudios'" name="school" class="color-categoria-estudios"></ion-icon>
+                            <ion-icon *ngIf="tarea.categoria === 'personal'" name="home" class="color-categoria-personal"></ion-icon>
+                            <ion-icon *ngIf="tarea.categoria === 'compras'" name="cart" class="color-categoria-compras"></ion-icon>
+                            <ion-icon *ngIf="tarea.categoria === 'otros'" src="assets/icon/otros.svg" class="color-categoria-otros"></ion-icon>
+                        </div>
 
                         <div class="tipo-categoria">
                             <p>{{ tarea.categoria }}</p>
@@ -121,6 +125,9 @@
                 </ion-button>
             </div>
         </ion-card-content>
+
+        <!-- Llamamos al componente de Ver Detalles -->
+        <app-task-details-modal [modalDetalles]="mostrarModalDetalles" [tareaSeleccionada]="tareaActual" (mostrarTareas)="mostrarModalDetalles = false" *ngIf="indice"></app-task-details-modal>
     </ion-card>
 
     <!-- Botón con icono + de abajo a la derecha -->

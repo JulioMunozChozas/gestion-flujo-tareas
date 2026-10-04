@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <!-- Porción superior derecha (#28a745) -->
+  <path fill="#28a745" d="M 13 2.05 v 8.95 h 8.95 A 9 9 0 0 0 13 2.05 Z" />
+  <!-- Porción inferior derecha (#28a745) -->
+  <path fill="#28a745" d="M 13 13 h 8.95 a 9 9 0 0 1 -6.33 6.33 L 13 13 Z" />
+  <!-- Porción principal izquierda (#28a745) -->
+  <path fill="#28a745" d="M 11 2.05 A 10 10 0 1 0 14.5 21.6 L 11 13 V 2.05 Z" />
+</svg>

@@ -4,6 +4,7 @@ import { IonicModule, ModalController } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TaskFormModalComponent } from '../task-form-modal/task-form-modal.component';
+import { TaskDetailsModalComponent } from '../task-details-modal/task-details-modal.component';
 import { addIcons } from 'ionicons';
 import { createOutline, trashOutline, eyeOutline } from 'ionicons/icons';
 
@@ -12,7 +13,7 @@ import { createOutline, trashOutline, eyeOutline } from 'ionicons/icons';
   selector: 'app-todo',
   templateUrl: './todo.page.html',
   styleUrls: ['./todo.page.scss'],
-  imports: [IonicModule, CommonModule, FormsModule, ExploreContainerComponentModule],
+  imports: [IonicModule, CommonModule, FormsModule, ExploreContainerComponentModule, TaskDetailsModalComponent],
   encapsulation: ViewEncapsulation.None // Permite que los estilos de este archivo salgan al DOM global
 })
 export class TodoPage implements OnInit {
@@ -22,6 +23,10 @@ export class TodoPage implements OnInit {
   // Variables para el diseño del mensaje de confirmación
   modalConfirmacionEliminar = false;
   tareaSeleccionada: any = null;
+  router: any;
+  mostrarModalDetalles = false;
+  tareaActual: any = null;
+
 
   constructor(private modalTaskController: ModalController) {
     addIcons({
@@ -117,6 +122,15 @@ export class TodoPage implements OnInit {
     }
   }
 
+  async mostrarDetallesTarea(tareaActualSeleccionada: any) {
+      console.log("Detalles de tarea "+tareaActualSeleccionada.nombre+" mostrados");
+      const detallesTarea = await this.modalTaskController.create({
+        component: TaskDetailsModalComponent,
+        componentProps: {tareaSeleccionada: tareaActualSeleccionada}
+      });
+
+      await detallesTarea.present();
+  }
 
   eliminarTareas() {
     this.listaTareas = [];// para eliminar todas las tareas directamente (Limpiar Historial)

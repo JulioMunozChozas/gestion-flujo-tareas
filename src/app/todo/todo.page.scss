@@ -70,19 +70,19 @@
             &.color-fecha-limite {
                 color: #5865f2;
             }
-            &.color-categoria-trabajo {
-                color: #5865f2;
+            .color-categoria-trabajo {
+                color: #5856d6;
             }
-            &.color-categoria-estudios {
+            .color-categoria-estudios {
                 color: #34c759;
             }
-            &.color-categoria-personal {
-                color: #2563eb;
+            .color-categoria-personal {
+                color: #007aff;
             }
-            &.color-categoria-compras {
+            .color-categoria-compras {
                 color: #ff9800;
             }
-            &.color-categoria-otros {
+            .color-categoria-otros {
                 color: #64748b;
             }
             &.color-prioridad-alta {
@@ -121,7 +121,7 @@
             }
         }
     }
-    
+
     .contenedor-progreso {
         margin-top: 16px;
         .cabecera-progreso {
@@ -146,7 +146,7 @@
         }
     }
     /* Menú para las opciones editar, eliminar y ver detalles */
-    
+
     .menu-opciones {
         .opcion-editar {
             color: #2563eb;
@@ -159,7 +159,7 @@
         }
     }
     /* Estructura del formulario modal */
-    
+
     ion-modal.modal-confirmacion-eliminar {
         --width: 330px;
         --height: auto;
@@ -174,7 +174,7 @@
             text-align: center;
         }
     }
-    
+
     .icono-cabecera {
         display: flex;
         align-items: center;
@@ -189,20 +189,20 @@
             font-size: 32px;
         }
     }
-    
+
     .titulo-modal {
         font-size: 20px;
         font-weight: 700;
         color: #111827;
         margin: 0 0 8px 0;
     }
-    
+
     .subtitulo-modal {
         font-size: 13.5px;
         color: #6b7280;
         margin: 0 0 6px 0;
     }
-    
+
     .mensaje-confirmacion {
         font-size: 13.5px;
         color: #4b5563;
@@ -214,13 +214,13 @@
         }
     }
     /* Para poner los botones en horizontal */
-    
+
     .acciones-modal {
         display: flex;
         gap: 12px;
         width: 100%;
     }
-    
+
     .boton-cancelar,
     .boton-eliminar {
         flex: 1;
@@ -230,13 +230,13 @@
         font-weight: 600;
         cursor: pointer;
     }
-    
+
     .boton-cancelar {
         color: #374151;
         border: 1px solid #d1d5db;
         background: #ffffff;
     }
-    
+
     .boton-eliminar {
         color: #ffffff;
         border: none;

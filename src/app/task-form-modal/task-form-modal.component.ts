@@ -60,6 +60,10 @@ export class TaskFormModalComponent implements OnInit {
       estado: ['Pendiente'],
       // Asignado automáticamente al crear (por defecto: 0)
       progreso: [0],
+      // Fecha de creación (por defecto: fecha actual)
+      fechaCreacion: [new Date()],
+      // Última actualización (coincide con la fecha de creación al añadir nueva tarea)
+      fechaActualizacion: [new Date()]
     });
   }
 
@@ -100,18 +104,24 @@ export class TaskFormModalComponent implements OnInit {
         prioridad: this.tareaSeleccionada.prioridad,
         fechaLimite: this.tareaSeleccionada.fechaLimite ? new Date(this.tareaSeleccionada.fechaLimite).toISOString() : '',
         categoria: this.tareaSeleccionada.categoria,
-        observaciones: this.tareaSeleccionada.observaciones,
+        observaciones: this.tareaSeleccionada.observaciones
       });
     }
     }
   }
   guardarTarea() {
     if (this.miTarea.valid) {
+      const tareaEditada = this.tareaSeleccionada != null;
       // Pasamos los datos del formulario de vuelta a la página principal
       // Si estamos editando, le devolvemos también el ID para saber cuál actualizar
       const tarea = {
         ...this.miTarea.value,
-        id: this.tareaSeleccionada ? this.tareaSeleccionada.id : null
+       id: tareaEditada ? this.tareaSeleccionada.id : null,
+
+      fechaCreacion: tareaEditada ? this.tareaSeleccionada.fechaCreacion : this.miTarea.value.fechaCreacion,// mantener dato de tarea
+
+      // CRÍTICO: La fecha de actualización siempre se renueva al momento exacto del guardado.
+      fechaActualizacion: new Date()
       };
 
       this.modalTaskController.dismiss(tarea, 'confirm');
@@ -119,15 +129,19 @@ export class TaskFormModalComponent implements OnInit {
   }
 
   editarTarea() {
-    let fechaFormateada = this.tareaSeleccionada.fechaLimite;
-    if (fechaFormateada) {
-      fechaFormateada = new Date(fechaFormateada).toISOString();
-    }
+    if (!this.tareaSeleccionada) return;
+
+    let fechaFormateada = this.tareaSeleccionada.fechaLimite
+    ? new Date(this.tareaSeleccionada.fechaFormateada).toISOString()
+    : null;
 
     // patchValue mapea las propiedades con los controles del formulario
     this.miTarea.patchValue({
       ...this.tareaSeleccionada,
-      fechaLimite: fechaFormateada
+      fechaLimite: fechaFormateada,
+      // Forzamos a cargar la fecha de creación y actualización originales en el formulario
+      fechaCreacion: this.tareaSeleccionada.fechaCreacion,
+      fechaActualizacion: this.tareaSeleccionada.fechaActualizacion
     });
   }
 }
