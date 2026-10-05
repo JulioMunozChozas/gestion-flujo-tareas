@@ -44,6 +44,7 @@
 
 @import "@ionic/angular/css/palettes/dark.system.css";
 
+
 /* Recuadro de modales de la aplicación redimensionados correctamente */
 
 ion-modal {
@@ -52,7 +53,6 @@ ion-modal {
     --height: min(730px, 92vh) !important;
     --border-radius: 16px;
     &::part(content) {
-        //height: 100% !important;
         border-radius: 16px;
     }
 }
