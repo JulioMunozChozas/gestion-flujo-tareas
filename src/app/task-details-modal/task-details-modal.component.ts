@@ -64,12 +64,21 @@ export class TaskDetailsModalComponent implements OnInit {
       console.log("Detalles de tarea "+tareaActualSeleccionada.nombre+" mostrados");
       const detallesTarea = await this.modalTaskController.create({
         component: TaskDetailsModalComponent,
-        cssClass: 'modal-detalles-tarea',
         componentProps: {tareaSeleccionada: tareaActualSeleccionada},
+        cssClass: 'modal-detalles-tarea'
       });
 
       await detallesTarea.present();
+
+      // Inyectamos variables al modal de Detalles de la Tarea
+      const modalDetallesTarea = document.querySelector('ion-modal.modal-detalles-tarea') as HTMLElement;
+      if (modalDetallesTarea) {
+        modalDetallesTarea.style.setProperty('--height', '850px');
+        modalDetallesTarea.style.setProperty('--max-height', '90vh');
+        modalDetallesTarea.style.setProperty('--width', '500px');
+      }
   }
+
 
   // Aquí obtenemos el estado de la tarea en Ver Detalles de Tarea
   obtenerEstado(estado?: string): string {

@@ -1,8 +1,8 @@
-/* Recuadro de ver Detalles de la Tarea redimensionado correctamente */
+/* Estilos del contenedor del modal de Ver Detalles de Tarea */
 
 :host {
     display: block;
-    height: auto;
+    height: 100%;
 }
 
 .contenedor-tarea-seleccionada {
@@ -11,7 +11,6 @@
     --padding-bottom: 24px;
     --padding-start: 24px;
     --padding-end: 24px;
-    // Sin márgenes por defecto a textos e iconos
     p,
     span,
     ion-icon {
